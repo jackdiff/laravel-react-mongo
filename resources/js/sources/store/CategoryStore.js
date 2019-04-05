@@ -5,7 +5,7 @@ import api, {makeDefaultHeader} from 'config/api'
 import CategoryModel from "models/CategoryModel"
 import State from 'config/state'
 
-export default class CategoryStores {
+class CategoryStores {
   @observable categories = [];
   @observable state = State.IDLE;
   @observable error = {};
@@ -14,6 +14,11 @@ export default class CategoryStores {
   @computed
   get allCategories() {
     return this.categories
+  }
+
+  @computed
+  get options() {
+    return this.categories.map(el => ({key: el.id, text: el.name, value: el.id}))
   }
 
   @action
@@ -127,3 +132,5 @@ export default class CategoryStores {
     return axios.post(api.REMOVE_CATEGORY + id, {}, {header});
   }
 }
+
+export default new CategoryStores()

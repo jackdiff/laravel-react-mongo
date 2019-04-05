@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Progress } from 'semantic-ui-react'
 import { observer } from "mobx-react"
-import { State } from 'store/ImportStore'
+import State from 'config/state'
 
 export default class ImportProgress extends Component {
   constructor(props) {

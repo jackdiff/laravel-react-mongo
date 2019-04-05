@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { Form, Input, Icon } from 'semantic-ui-react'
 import { observable, action } from "mobx"
 import { observer } from "mobx-react"
-import { State } from 'store/ImportStore'
+import State from 'config/state'
+import categoryStore from 'store/CategoryStore'
 
 const options = [
   { key: 'm', text: 'Male', value: 'male' },
@@ -21,6 +22,7 @@ export default class ImportFile extends Component {
     this.handleFile = this.handleFile.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCategory = this.handleCategory.bind(this)
+    categoryStore.loadAll()
   }
 
   handleCategory(e, obj) {
@@ -62,9 +64,9 @@ export default class ImportFile extends Component {
 
   render() {
     return (
-      <Form loading={this.props.store.state == State.FETCHING}>
+      <Form loading={this.props.store.state == State.FETCHING || categoryStore.state == State.FETCHING}>
         <Form.Group widths='equal'>
-          <Form.Select value={this.state.category} onChange={this.handleCategory} fluid label='Danh mục khách hàng' options={options} placeholder='-' />
+          <Form.Select value={this.state.category} onChange={this.handleCategory} fluid label='Danh mục khách hàng' options={categoryStore.options} placeholder='-' />
         </Form.Group>
         <Form.Group inline>
           <Form.Field>

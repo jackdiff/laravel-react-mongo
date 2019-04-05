@@ -1,15 +1,9 @@
 import mobx, { observable, computed, action, flow } from "mobx"
 import axios from 'axios'
 import api, {makeDefaultHeader} from 'config/api'
+import State from 'config/state'
 
-export const State = {
-    FETCHING : 1,
-    IDLE: 0,
-    SUCCESS: 2,
-    ERROR: 3
-}
-
-export default class ImportStores {
+class ImportStores {
   @observable state = State.IDLE; //0/1/2/3
   @observable error = {};
   @observable format = [];
@@ -75,5 +69,6 @@ export default class ImportStores {
     let header = makeDefaultHeader()
     return axios.post(api.IMPORT_STRUCTURE, data, {header});
   }
-
 }
+
+export default new ImportStores

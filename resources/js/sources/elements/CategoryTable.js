@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
-import { Table, Icon, Confirm } from 'semantic-ui-react'
+import { Table, Icon, Confirm , Segment} from 'semantic-ui-react'
 import { observable, action } from "mobx"
 import { observer } from "mobx-react"
+import State from 'config/state'
 
 @observer
 export default class CategoryTable extends Component {
@@ -30,7 +31,8 @@ export default class CategoryTable extends Component {
 
   render() {
     return (
-      <Table celled striped>
+      <Segment loading={this.props.store.state == State.FETCHING}>
+      <Table celled striped >
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell colSpan='3'>Danh mục khách hàng</Table.HeaderCell>
@@ -49,6 +51,7 @@ export default class CategoryTable extends Component {
         </Table.Body>
         <Confirm content='Có chắc chắn xoá không ?' open={this.state.confirm != null} onCancel={() => this.setState({confirm: null})} onConfirm={this.delete} />
       </Table>
+      </Segment>
     )
   }
 }

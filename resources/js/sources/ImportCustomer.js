@@ -3,9 +3,8 @@ import { Form, Step } from 'semantic-ui-react'
 import { observer } from "mobx-react"
 import ImportFile from 'elements/ImportFile'
 import FormatStructure from 'elements/FormatStructure'
+import importStore from "store/ImportStore"
 
-import ImportStore from "store/ImportStore";
-const importStore = new ImportStore()
 importStore.setFields(window.bundle)
 
 @observer 
