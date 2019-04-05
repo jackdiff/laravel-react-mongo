@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class AnalyzeImportFile extends AppBaseRequest
+class AnalyzeImport extends AppBaseRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -11,7 +11,7 @@ class AnalyzeImportFile extends AppBaseRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,14 +22,14 @@ class AnalyzeImportFile extends AppBaseRequest
     public function rules()
     {
         return [
-            'file' => 'required|mimes:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            'fileImport' => 'required|mimexls'
         ];
     }
 
     public function messages() {
         return [
-            'file.required' => 'Không có file được chọn',
-            'file.mimes'  => 'Không phải là file excel',
+            'fileImport.required' => 'Không có file được chọn',
+            'fileImport.mimexls'  => 'Không phải là file excel',
         ];
     }
 }

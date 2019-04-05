@@ -14,9 +14,9 @@ export default class ImportFile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      fileImport: {},
+      fileImport: props.store.fileImport,
       loadFile: false,
-      category: '',
+      category: props.store.category,
     }
     this.handleFile = this.handleFile.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -64,7 +64,7 @@ export default class ImportFile extends Component {
     return (
       <Form loading={this.props.store.state == State.FETCHING}>
         <Form.Group widths='equal'>
-          <Form.Select onChange={this.handleCategory} fluid label='Danh mục khách hàng' options={options} placeholder='-' />
+          <Form.Select value={this.state.category} onChange={this.handleCategory} fluid label='Danh mục khách hàng' options={options} placeholder='-' />
         </Form.Group>
         <Form.Group inline>
           <Form.Field>

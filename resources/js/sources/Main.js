@@ -4,9 +4,6 @@ import { BrowserRouter as Router, Route } from "react-router-dom"
 import Navigator from 'Navigator'
 import ImportCustomer from 'ImportCustomer'
 import Category from 'Category'
-import CategoryStore from "store/CategoryStore";
-
-const categoryStore = new CategoryStore()
 
 export default class Main extends Component {
   constructor(props) {
@@ -34,7 +31,7 @@ export default class Main extends Component {
             <Grid.Column stretched width={12}>
               <Route exact path="/" render={(props) => <ImportCustomer {...props} />} />
               <Route path="/import" render={(props) => <ImportCustomer {...props} />} />
-              <Route path="/category" render={(props) => <Category {...props} store={categoryStore}/>} />
+              <Route path="/category" render={(props) => <Category {...props}/>} />
             </Grid.Column>
           </Grid.Row>
         </Grid>

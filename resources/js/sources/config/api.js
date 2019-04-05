@@ -1,5 +1,8 @@
 const api = {
-  IMPORT_STRUCTURE: '/import/analyze'
+  IMPORT_STRUCTURE: '/import/analyze',
+  ADD_CATEGORY: '/category/add',
+  LIST_CATEGORY: '/categories',
+  'REMOVE_CATEGORY' : '/category/remove/',
 }
 export default api;
 

@@ -11,16 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
-Route::get('/import', function () {
-    return view('welcome');
-});
+Route::get('/import', 'HomeController@index');
 
-Route::get('/category', function () {
-    return view('welcome');
-});
+Route::get('/category', 'HomeController@index');
+
+Route::post('/category/add', 'CategoryController@add');
+Route::get('/categories', 'CategoryController@index');
+Route::post('/category/remove/{id}', 'CategoryController@remove');
 
 Route::post('/import/analyze', 'ImportController@analyze');

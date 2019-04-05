@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
-class StoreCategory extends AppBaseRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class StoreBlogPost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +24,7 @@ class StoreCategory extends AppBaseRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:categories|max:200'
+            //
         ];
-    }
-
-    public function messages() {
-        return [
-        'name.required' => 'Tên danh mục không được trống',
-        'name.max'  => 'Tên danh mục không được quá 200 kí tự',
-    ];
     }
 }
