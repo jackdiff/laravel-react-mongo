@@ -13,12 +13,11 @@
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/import', 'HomeController@index');
-
 Route::get('/category', 'HomeController@index');
-
 Route::post('/category/add', 'CategoryController@add');
 Route::get('/categories', 'CategoryController@index');
 Route::post('/category/remove/{id}', 'CategoryController@remove');
 
 Route::post('/import/analyze', 'ImportController@analyze');
+Route::get('/import', 'HomeController@index');
+Route::post('/import', 'ImportController@process');

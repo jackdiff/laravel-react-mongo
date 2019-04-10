@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react'
 import { Grid, Table, Icon, Modal, Header, Button, Form, Container, Message } from 'semantic-ui-react'
 import CategoryForm from 'elements/CategoryForm'
 import CategoryTable from 'elements/CategoryTable'
-import categoryStore from "store/CategoryStore";
 
 export default class Category extends Component {
   constructor(props) {
@@ -19,9 +18,9 @@ export default class Category extends Component {
     return (
       <Fragment>
         <Container>
-          <CategoryForm store={categoryStore}/>
+          <CategoryForm/>
         </Container>
-        <CategoryTable store={categoryStore}/>
+        <CategoryTable/>
       </Fragment>
     )
   }

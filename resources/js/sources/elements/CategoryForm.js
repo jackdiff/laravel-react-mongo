@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import { Grid, Table, Icon, Modal, Header, Button, Form, Container, Message } from 'semantic-ui-react'
 import { observer } from "mobx-react"
+import StoreContext from 'store/Context'
 
 @observer
 export default class CategoryForm extends Component {
+  static contextType = StoreContext
   constructor(props) {
     super(props);
     this.state = {
@@ -14,21 +16,21 @@ export default class CategoryForm extends Component {
   }
 
   handleOpen() {
-    this.props.store.showForm();
+    this.context.categoryStore.showForm();
   }
 
   handleClose() {
-    this.props.store.clear()
+    this.context.categoryStore.clear()
   }
 
   handleAdd() {
     if(this.newCategory.value) {
-      this.props.store.requestAdd(this.newCategory.value, this.props.store.showModal.id)
+      this.context.categoryStore.requestAdd(this.newCategory.value, this.context.categoryStore.showModal.id)
     }
   }
 
   render() {
-    let category = this.props.store.showModal;
+    let category = this.context.categoryStore.showModal;
     if(!category) {
       category = {}
     }
@@ -40,20 +42,20 @@ export default class CategoryForm extends Component {
             <Icon name='plus' />
           </Button.Content>
         </Button>}
-        open={this.props.store.showModal != null}
+        open={this.context.categoryStore.showModal != null}
         onClose={this.handleClose}
         size='small'
       >
         <Header icon='address book' content={category.id ? 'Cập nhật danh mục khách hàng!' :'Thêm danh mục khách hàng mới!'} />
         <Modal.Content>
-          <Form error={this.props.store.error.name ? true : false}>
+          <Form error={this.context.categoryStore.error.name ? true : false}>
             <Form.Field>
               <label>Danh mục</label>
               <input placeholder='category' ref={(el) => this.newCategory = el} defaultValue={category.name}/>
             </Form.Field>
-            {this.props.store.error && <Message
+            {this.context.categoryStore.error && <Message
               error
-              content={this.props.store.error.name}
+              content={this.context.categoryStore.error.name}
             />}
           </Form>
         </Modal.Content>

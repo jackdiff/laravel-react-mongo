@@ -2,10 +2,12 @@ import React, { Component, Fragment } from 'react'
 import { Table, Icon, Confirm , Segment} from 'semantic-ui-react'
 import { observable, action } from "mobx"
 import { observer } from "mobx-react"
+import StoreContext from 'store/Context'
 import State from 'config/state'
 
 @observer
 export default class CategoryTable extends Component {
+  static contextType = StoreContext
   constructor(props) {
     super(props);
     this.state = {
@@ -13,7 +15,10 @@ export default class CategoryTable extends Component {
     }
     this.delete = this.delete.bind(this)
     this.confirm = this.confirm.bind(this)
-    props.store.loadAll()
+  }
+
+  componentDidMount() {
+    this.context.categoryStore.loadAll()
   }
 
   confirm (id) {
@@ -21,17 +26,17 @@ export default class CategoryTable extends Component {
   }
 
   delete(id) {
-    this.props.store.requestRemove(this.state.confirm)
+    this.context.categoryStore.requestRemove(this.state.confirm)
     this.setState({confirm: null})
   }
 
   update(category) {
-    this.props.store.showForm(category)
+    this.context.categoryStore.showForm(category)
   }
 
   render() {
     return (
-      <Segment loading={this.props.store.state == State.FETCHING}>
+      <Segment loading={this.context.categoryStore.state == State.FETCHING}>
       <Table celled striped >
         <Table.Header>
           <Table.Row>
@@ -39,7 +44,7 @@ export default class CategoryTable extends Component {
           </Table.Row>
         </Table.Header>
         <Table.Body>
-        {this.props.store.categories.map(category => (
+        {this.context.categoryStore.categories.map(category => (
           <Table.Row key={category.id}>
             <Table.Cell>{category.name}</Table.Cell>
             <Table.Cell collapsing textAlign='right'>

@@ -2,27 +2,31 @@ import React, { Component, Fragment } from 'react'
 import { Form, Input, Icon } from 'semantic-ui-react'
 import { observable, action } from "mobx"
 import { observer } from "mobx-react"
+import StoreContext from 'store/Context'
 import State from 'config/state'
-import categoryStore from 'store/CategoryStore'
-
-const options = [
-  { key: 'm', text: 'Male', value: 'male' },
-  { key: 'f', text: 'Female', value: 'female' },
-]
 
 @observer
 export default class ImportFile extends Component {
+  static contextType = StoreContext
   constructor(props) {
     super(props)
     this.state = {
-      fileImport: props.store.fileImport,
+      fileImport: null,
       loadFile: false,
-      category: props.store.category,
+      category: null,
     }
     this.handleFile = this.handleFile.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleCategory = this.handleCategory.bind(this)
-    categoryStore.loadAll()
+  }
+
+  componentDidMount() {
+    this.context.categoryStore.loadAll()
+    this.setState({
+      fileImport: this.context.importStore.fileImport,
+      loadFile: false,
+      category: this.context.importStore.category,
+    })
   }
 
   handleCategory(e, obj) {
@@ -54,7 +58,7 @@ export default class ImportFile extends Component {
 
   handleSubmit(e) {
     if(this.state.fileImport) {
-      this.props.store.fetchStructure({
+      this.context.importStore.fetchStructure({
         fileImport: this.state.fileImport,
         category: this.state.category,
       })
@@ -64,9 +68,9 @@ export default class ImportFile extends Component {
 
   render() {
     return (
-      <Form loading={this.props.store.state == State.FETCHING || categoryStore.state == State.FETCHING}>
+      <Form loading={this.context.importStore.state == State.FETCHING || this.context.categoryStore.state == State.FETCHING}>
         <Form.Group widths='equal'>
-          <Form.Select value={this.state.category} onChange={this.handleCategory} fluid label='Danh mục khách hàng' options={categoryStore.options} placeholder='-' />
+          <Form.Select value={this.state.category} onChange={this.handleCategory} fluid label='Danh mục khách hàng' options={this.context.categoryStore.options} placeholder='-' />
         </Form.Group>
         <Form.Group inline>
           <Form.Field>

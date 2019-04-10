@@ -19,4 +19,8 @@ class CustomerService implements CustomerServiceInterface
             'city' => 'Tỉnh thành'
         ];
     }
+
+    public function import($file, $category, $fields) {
+        
+    }
 }

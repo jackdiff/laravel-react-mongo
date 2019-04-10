@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AnalyzeImport;
+use App\Http\Requests\ProcessImport;
 use App\ServiceInterfaces\FileImportServiceInterface;
 use App\ServiceInterfaces\CustomerServiceInterface;
 
@@ -24,5 +25,9 @@ class ImportController extends Controller
                 'success' => true,
                 'format' => $format
             ]);
+    }
+
+    public function process(ProcessImport $request) {
+        
     }
 }
