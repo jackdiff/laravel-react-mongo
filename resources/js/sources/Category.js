@@ -10,10 +10,6 @@ export default class Category extends Component {
     }
   }
 
-  handleEdit(category) {
-    
-  }
-
   render() {
     return (
       <Fragment>

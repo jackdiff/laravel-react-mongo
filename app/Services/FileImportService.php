@@ -37,6 +37,7 @@ class FileImportService implements FileImportServiceInterface
             }
 
             if(!empty($structure)) {
+                //map default field with header
                 $header = array_keys($fields);
                 if(count($header) < count($structure[0])) {
                     for ($i = 0, $n=count($structure[0]) - count($header); $i < $n; $i++) {
