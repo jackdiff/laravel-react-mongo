@@ -4,6 +4,7 @@ const api = {
   ADD_CATEGORY: '/category/add',
   LIST_CATEGORY: '/categories',
   REMOVE_CATEGORY : '/category/remove/',
+  LIST_CUSTOMER: '/customers',
 }
 export default api;
 

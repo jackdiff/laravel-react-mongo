@@ -47,7 +47,7 @@ class ImportStores {
   @action
   fetchStructure = flow(function * (form) {
     this.format = []
-    this.fields = []
+    this.fields = {}
     this.state = State.FETCHING
     try {
       const response = yield this.fetchStructureAPI(form)
@@ -65,7 +65,6 @@ class ImportStores {
         this.state = State.ERROR
         this.error = response.data.errors
       }
-      
     } catch (error) {
       this.state = State.ERROR
       this.error = {common: 'Can not connect to server!'}
@@ -113,7 +112,7 @@ class ImportStores {
     const data = new FormData()
     data.append('category', this.category)
     data.append('fileImport', this.fileImport.file)
-    data.append('fields', this.fields)
+    data.append('fields', JSON.stringify(this.fields))
 
     let header = makeDefaultHeader()
     return axios.post(api.IMPORT, data, {header});

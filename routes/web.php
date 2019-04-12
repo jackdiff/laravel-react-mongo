@@ -21,3 +21,4 @@ Route::post('/category/remove/{id}', 'CategoryController@remove');
 Route::post('/import/analyze', 'ImportController@analyze');
 Route::get('/import', 'HomeController@index');
 Route::post('/import', 'ImportController@process');
+Route::get('/customers', 'HomeController@customers');

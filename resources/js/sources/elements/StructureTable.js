@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Table, Select, Container, Button, Segment } from 'semantic-ui-react'
 import { observer } from "mobx-react"
 import StoreContext from 'store/Context'
+import State from 'config/state'
 
 @observer
 export default class StructureTable extends Component {
@@ -35,7 +36,7 @@ export default class StructureTable extends Component {
   }
 
   handleProcess() {
-    this.importStore.upload()
+    this.context.importStore.upload()
   }
 
   makeHeader() {
@@ -45,7 +46,7 @@ export default class StructureTable extends Component {
     if(structure) {
       return structure.map((key, i) => ( 
       <Table.HeaderCell singleLine key={this.props.prefixKey + i}>
-        <Select value={fields[i]} options={this.context.customerStore.fields} onChange={(e, obj) => this.handleSetField(obj, sheet, i)}/>
+        <Select value={fields[i]} options={this.context.customerStore.fieldOptions} onChange={(e, obj) => this.handleSetField(obj, sheet, i)}/>
       </Table.HeaderCell>))
     }
     return []

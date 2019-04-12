@@ -65,10 +65,21 @@
             .scroll {
                 overflow: scroll;
             }
+
+            .m50 {
+                min-width: 50px;
+            }
+            .m150 {
+                min-width: 150px;
+            }
+            .m250 {
+                min-width: 250px;
+            }
         </style>
         <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
         <script type="text/javascript">
-          window.bundle = @json($fields, true);
+          window.fields = @json($fields, true);
+          window.fieldStyles = @json($fieldStyles, true);
         </script>
         <script src="/js/bundle.js" defer></script>
     </head>
