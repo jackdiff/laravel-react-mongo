@@ -43,6 +43,7 @@ export default class ImportCustomer extends Component {
         </Step.Group>
         { this.context.importStore.step ==1 && <ImportFile/> }
         { this.context.importStore.step ==2 && <FormatStructure/>}
+        { this.context.importStore.step ==3 && <h3>DONE!</h3>}
       </Fragment>
     )
   }

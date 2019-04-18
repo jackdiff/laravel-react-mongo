@@ -38,9 +38,8 @@ class CustomerService implements CustomerServiceInterface
 
     public function import($file, $category, $fields) {
         $reader = new Xlsx();
-        $spreadsheet = $reader->load($file);
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($file);
         $worksheets = $spreadsheet->getAllSheets();
-
         $toSave = [];
         foreach($worksheets as $ws) {
             $count = 0;
@@ -57,7 +56,7 @@ class CustomerService implements CustomerServiceInterface
                     continue;
                 }
                 $cellIterator = $row->getCellIterator();
-                $cellIterator->setIterateOnlyExistingCells(FALSE);
+                $cellIterator->setIterateOnlyExistingCells(true);
                 $line = [];
                 $i = 0;
                 foreach ($cellIterator as $cell) {
@@ -74,7 +73,7 @@ class CustomerService implements CustomerServiceInterface
             }
         }
         if(!empty($toSave)) {
-            Customer::insert($toSave);
+            //Customer::insert($toSave);
         }
     }
 }

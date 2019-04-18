@@ -9,7 +9,7 @@ class FileImportService implements FileImportServiceInterface
 {
     public function makeFormat($file, $fields) {
         $reader = new Xlsx();
-        $spreadsheet = $reader->load($file);
+        $spreadsheet = \PhpOffice\PhpSpreadsheet\IOFactory::load($file);
         $worksheets = $spreadsheet->getAllSheets();
 
         $format = [];
@@ -26,7 +26,9 @@ class FileImportService implements FileImportServiceInterface
                     if($isEmpty && !empty($cell->getValue())) {
                         $isEmpty = false;
                     }
-                    $line[] = (string)$cell->getValue();
+                    if(!empty($cell->getValue())) {
+                        $line[] = (string)$cell->getValue();
+                    }
                 }
                 if(!$isEmpty) {
                     $structure[] = $line;

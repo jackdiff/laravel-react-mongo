@@ -2,7 +2,7 @@ db.createCollection("customers", {
    validator: {
       $jsonSchema: {
          bsonType: "object",
-         required: [ "no", 'name', 'company', 'address', 'tel', 'mobile_tel', 'position' ,'website' ,'city'  ],
+         required: [ "no", 'name', 'company', 'address', 'tel' ,'website' ,'city'  ],
          properties: {
             name: {
                bsonType: "string",
