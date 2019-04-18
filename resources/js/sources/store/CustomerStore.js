@@ -14,7 +14,18 @@ class CustomerStores {
   @observable maxPage = 1;
   @observable sortcol = '';
   @observable sort = '';
+  @observable filters = {
+    category: '',
+    name: '',
+    address: '',
+    tel: '',
+  }
   pagesize = 25
+
+  @action
+  setFilter(key, value) {
+    this.filters[key] = value;
+  }
 
   @action
   setFields(fields, fieldStyles) {
@@ -28,6 +39,12 @@ class CustomerStores {
   getStyle(field) {
     console.log(field, this.fieldStyles[field])
     return this.fieldStyles[field]
+  }
+
+  @action
+  search() {
+    this.currentPage = 1
+    this.loadAll()
   }
 
   @action
@@ -56,7 +73,7 @@ class CustomerStores {
   @action
   fetchLoadAll() {
     let header = makeDefaultHeader()
-    return axios.get(api.LIST_CUSTOMER, {params: {page: this.currentPage}}, {header});
+    return axios.get(api.LIST_CUSTOMER, {params: {page: this.currentPage, ...this.filters}}, {header});
   }
 
 }

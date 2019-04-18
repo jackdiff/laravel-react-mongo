@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react'
-import { Table, Pagination, Container, Segment } from 'semantic-ui-react'
+import { Table, Pagination, Container, Segment, Icon, Button } from 'semantic-ui-react'
 import { observable, action } from "mobx"
 import { observer } from "mobx-react"
 import StoreContext from 'store/Context'
 import State from 'config/state'
+import CustomerFilter from 'elements/CustomerFilter'
 
 @observer
 export default class Customer extends Component {
@@ -57,11 +58,9 @@ export default class Customer extends Component {
     return (
       <Fragment>
         <Segment loading={this.context.customerStore.state == State.FETCHING} style={{overflow: 'scroll'}}>
-          <Container textAlign='right'><Pagination
-            onPageChange={this.handlePaginationChange}
-            activePage={this.context.customerStore.currentPage} 
-            totalPages={this.context.customerStore.maxPage} />
-            </Container>
+          <Container >
+            <CustomerFilter />
+          </Container>
           <Table sortable compact celled>
             <Table.Header>
               <Table.Row>
