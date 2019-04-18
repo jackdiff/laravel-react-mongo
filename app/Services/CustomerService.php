@@ -56,7 +56,7 @@ class CustomerService implements CustomerServiceInterface
                     continue;
                 }
                 $cellIterator = $row->getCellIterator();
-                $cellIterator->setIterateOnlyExistingCells(true);
+                $cellIterator->setIterateOnlyExistingCells(false);
                 $line = [];
                 $i = 0;
                 foreach ($cellIterator as $cell) {
@@ -73,7 +73,7 @@ class CustomerService implements CustomerServiceInterface
             }
         }
         if(!empty($toSave)) {
-            //Customer::insert($toSave);
+            Customer::insert($toSave);
         }
     }
 }
