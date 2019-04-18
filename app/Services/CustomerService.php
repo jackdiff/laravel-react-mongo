@@ -60,8 +60,9 @@ class CustomerService implements CustomerServiceInterface
                 $line = [];
                 $i = 0;
                 foreach ($cellIterator as $cell) {
-                    if(!empty(@$wsFields[$i])) {
-                        $line[@$wsFields[$i]] = (string)$cell->getValue();
+                    $val = trim((string)$cell->getValue());
+                    if(!empty(@$wsFields[$i]) && !empty($val)) {
+                        $line[@$wsFields[$i]] = $val;
                     }
                     $i++;
                 }
